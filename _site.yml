@@ -1,0 +1,17 @@
+name: "divida-publica-rj"
+output_dir: "."
+navbar:
+  title: "Dívida Publica do RJ"
+  left:
+    - text: "INICIAL"
+      href: index.html
+    - text: "HISTÓRICO"
+      href: historico.html
+    - text: "DÍVIDA COM A UNIÃO"
+      href: dividauniao.html
+    - text: "DEMAIS DÍVIDAS"
+      href: demaisdividas.html
+    - text: "CPI DA DÍVIDA"
+      href: cpi.html
+    - text: "O QUE FAZER?"
+      href: oquefazer.html
