@@ -15,3 +15,8 @@ navbar:
       href: cpi.html
     - text: "O QUE FAZER?"
       href: oquefazer.html
+output:
+    html_document:
+        code_folding: "hide"
+        includes:
+            after_body: footer.html

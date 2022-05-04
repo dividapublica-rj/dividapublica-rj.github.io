@@ -1,10 +1,37 @@
 ---
-title: "INÍCIO"
+title: "Início"
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 8, collapse = TRUE)
+options(scipen = 999)
+```
 
-* A dívida pública do Rio de Janeiro
-		Breve introdução, motivação e estrutura do site
-*	Relação com RCL
-*	Comparação com outros estados
-*	Encargos da dívida vs  gastos em INVESTIMENTO/SAUDE/EDUCAÇÃO
+## Estrutura da Dívida Pública do RJ
+
+
+```{r bibliotecas, echo=F, message=FALSE, warning=FALSE}
+library(collapsibleTree)
+library(here)
+```
+
+```{r}
+options(scipen = 999) 
+
+divida_RJ <- read.csv2(here("data", "processed", "dividarj.csv"), encoding = "UTF-8")
+
+
+# Represent this tree:
+collapsibleTree( divida_RJ,
+                      c("tipo_adm","origem","credor","divida","saldo"),
+                      fill = c("seashell",
+                               rep("brown", length(unique(divida_RJ$tipo_adm))),
+                               rep("khaki", length(unique(paste(divida_RJ$tipo_adm, divida_RJ$origem)))),
+                               rep("forestgreen", length(unique(paste(divida_RJ$tipo_adm, divida_RJ$credor)))),
+                               rep("blue", length(unique(paste(divida_RJ$credor,divida_RJ$divida)))),
+                               rep("yellow", length(unique(paste(divida_RJ$divida, divida_RJ$saldo))))
+                             )
+)
+```
+
+
