@@ -1,0 +1,98 @@
+---
+title: "INÍCIO"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 8, collapse = TRUE)
+options(scipen = 999)
+```
+
+```{r bibliotecas, message=FALSE, warning=FALSE}
+library(collapsibleTree)
+library(here)
+library(dplyr)
+library(plotly)
+```
+
+```{r importacao_dados}
+divida_RJ <- read.csv2(here("data", "processed", "dividarj.csv"), encoding = "UTF-8")
+```
+
+
+Texto sobre a dívida pública do Rio de Janeiro.
+
+* Breve introdução ao tema, motivação e estrutura do site.
+* Valores da dívida e alguns indicadores (como a relação com RCL)
+* Quadro comparativo com outros estados
+* Encargos da dívida vs. gastos em investimento/saúde/educação, etc.
+
+<br>
+<br>
+
+##  Estrutura da Dívida Pública do RJ
+```{r arvore_divida}
+collapsibleTree( divida_RJ,
+                      c("tipo_adm","origem","credor","divida","saldo"),
+                      fill = c("seashell",
+                               rep("brown", length(unique(divida_RJ$tipo_adm))),
+                               rep("khaki", length(unique(paste(divida_RJ$tipo_adm, divida_RJ$origem)))),
+                               rep("forestgreen", length(unique(paste(divida_RJ$tipo_adm, divida_RJ$credor)))),
+                               rep("blue", length(unique(paste(divida_RJ$credor,divida_RJ$divida)))),
+                               rep("yellow", length(unique(paste(divida_RJ$divida, divida_RJ$saldo))))
+                             )
+)
+```
+
+<br>
+
+## Composição da Dívida Pública do RJ (2022)
+# {.tabset .tabset-fade .tabset-pills}
+***
+
+## TOTAL
+```{r pizza_total, out.width= "50%", fig.align = 'center'}
+data_pie <- divida_RJ %>%
+  group_by(tipo_credor) %>%
+  summarise(Divida = sum(saldo))
+
+data_pie <- data_pie %>%
+  mutate(proporcao = Divida/sum(Divida))
+
+pie <- plot_ly(data_pie, labels = ~tipo_credor, values = ~Divida, type = 'pie')
+pie <- pie %>%
+  layout(title = 'COMPOSIÇÃO DA DÍVIDA PÚBLICA')
+
+pie
+```
+
+
+
+## UNIÃO
+```{r uniao, out.width="65%", fig.align = 'center'}
+uniao_pie <- divida_RJ %>%
+  filter(credor == "UNIAO")
+
+gr_uniao_pie <- plot_ly(uniao_pie, labels = ~divida, values = ~saldo, type = 'pie')
+gr_uniao_pie <- gr_uniao_pie %>%
+  layout(title = 'COMPOSIÇÃO DA DÍVIDA COM A UNIÃO')
+
+gr_uniao_pie
+```
+
+
+## EXTERNA
+```{r externa, out.width="55%", fig.align = 'center'}
+externa_pie <- divida_RJ %>%
+  filter(origem == "Externa")%>%
+  group_by(credor)%>%
+  summarise(saldo = sum(saldo))
+
+gr_externa_pie <- plot_ly(externa_pie, labels = ~credor, values = ~saldo, type = 'pie')
+gr_externa_pie <- gr_externa_pie %>%
+  layout(title = 'COMPOSIÇÃO DA DÍVIDA EXTERNA')
+
+gr_externa_pie
+```
+
+
+
