@@ -30,6 +30,7 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -219,6 +220,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -273,6 +277,14 @@ $(document).ready(function () {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">A DÍVIDA COM A UNIÃO</h1>
@@ -280,19 +292,20 @@ $(document).ready(function () {
 </div>
 
 
-<p>Contextualizar e indicar os principais efeitos de cada uma das
-seguintes leis:</p>
+<p>Contextualizar e indicar os principais efeitos de cada uma das seguintes leis:</p>
 <ul>
-<li>Lei Complementar 148/14 – Altera a lei 9496/97. A dívida passa a ter
-uma taxa de 4% a.a. e corrigida pelo IPCA, limitados à SELIC.</li>
-<li>Lei Complementar 156/16 (amplia por mais 240 meses o pagamento da
-dívida oriunda da lei 9496/97)</li>
+<li>Lei Complementar 148/14 – Altera a lei 9496/97. A dívida passa a ter uma taxa de 4% a.a. e corrigida pelo IPCA, limitados à SELIC.</li>
+<li>Lei Complementar 156/16 (amplia por mais 240 meses o pagamento da dívida oriunda da lei 9496/97)</li>
 <li>Lei Complementar 159/17 - Cria o Regime de Recuperação Fiscal</li>
-<li>Lei Complementar 173/20 - Suspenção das dívidas dos estados devido
-ao coronavírus</li>
+<li>Lei Complementar 173/20 - Suspenção das dívidas dos estados devido ao coronavírus</li>
 <li>Lei Complementar 178/21 - Novo RRF.</li>
 </ul>
 
+&nbsp;
+<hr />
+<p style="text-align: center;">Desenvolvido por <a href="https://github.com/gzelesco/">Gabriel Zelesco</a></p>
+<p style="text-align: center;"><span style="color: #808080;"><em>gzelesco@gmail.com</em></span></p>
+&nbsp;
 
 
 
@@ -326,6 +339,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
