@@ -15,6 +15,7 @@ library(plotly)
 library(IRdisplay)
 library(ggplot2)
 library(RColorBrewer)
+library(htmlwidgets)
 ```
 
 ```{r importacao_dados}
@@ -86,8 +87,7 @@ gr_uniao_pie <- ggplot(uniao_pie, aes(x="", y=saldo, fill=divida)) +
 
 gr_uniao_pie <- gr_uniao_pie +scale_fill_brewer(palette = "Set3")
 
-gr_uniao_pie
-
+print(gr_uniao_pie)
 ```
 
 ## EXTERNA
@@ -105,8 +105,16 @@ gr_externa_pie <- ggplot(externa_pie, aes(x="", y=saldo, fill=credor)) +
 
 gr_externa_pie <- gr_externa_pie +scale_fill_brewer(palette = "Set3")
 
-gr_externa_pie
+print(gr_externa_pie)
+```
 
+
+# grafico plotly
+```{r}
+fig <- plot_ly(uniao_pie, labels= ~divida, values= ~saldo, type= 'pie')
+htmlwidgets::saveWidget(as_widget(fig), "fig.html")
+
+knitr::include_url("fig.html", height="500px")
 ```
 
 
