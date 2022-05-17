@@ -110,7 +110,7 @@ print(gr_externa_pie)
 
 
 # grafico plotly
-```{r}
+```{r out.extra='style="border: none;"', out.width='100%'}
 fig <- plot_ly(uniao_pie, labels= ~divida, values= ~saldo, type= 'pie')
 htmlwidgets::saveWidget(as_widget(fig), "fig.html")
 
